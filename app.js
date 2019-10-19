@@ -12,15 +12,9 @@ app.set('port', process.env.PORT || 7878);
 var cmd=require('node-cmd');
 
 app.post('/gitPush', function (req, res) {
-console.log("Received the message inside gitPush->"+ JSON.stringify(req));
+console.log("Received the message inside gitPush->"+ JSON.stringify(req.body));
 
-    cmd.get(
-        `
-            git clone https://github.com/andalike/dockerImageNode.git
-            cd dockerImageNode
-            sudo docker build -t andalike/node-web-app .
-            sudo docker run -p 49160:8080 -d andalike/node-web-app
-        `,
+    cmd.get('bash script.sh',
         function(err, data, stderr){
             if (!err) {
                console.log('Error in Running the Code->',data)
